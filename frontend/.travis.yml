@@ -1,0 +1,10 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t kamahl437/docker-tutorial -f Dockerfile.dev .
+# adding the coverage flag to make the test console close after it starts.  normally it runs then has an interactive
+# screen when its done, we don't want that since travis won't be able to finish
+script:
+  - docker run kamahl437/docker-tutorial npm run test -- --coverage
